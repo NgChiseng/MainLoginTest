@@ -265,7 +265,7 @@ public class TourActivity extends AppCompatActivity {
         images.
         */
         private ImageView img;
-        private Integer[] tour_imgs = {R.drawable.graphic, R.drawable.map, R.drawable.tree};
+        //private Integer[] tour_imgs = {R.drawable.graphic, R.drawable.map, R.drawable.tree};
 
         public PlaceholderFragment() {
         }
