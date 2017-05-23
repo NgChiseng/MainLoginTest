@@ -28,6 +28,11 @@ public class MainActivity extends AppCompatActivity {
         if (visited){
 
         } else {
+
+            /* --- This will create the intent to pass information of the context to the TourActivity,
+            close the old activities on the Activities stack, put the TourActivity in top of the
+            stack after the its start, and finally call onDestroy() the present activity.
+             */
             Intent i = new Intent(MainActivity.this, TourActivity.class);
             i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             startActivity(i);
