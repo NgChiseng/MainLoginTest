@@ -114,16 +114,17 @@ public class TourActivity extends AppCompatActivity {
 
                 switch (position) {
                     case 0:
-                        mViewPager.setBackgroundColor(0xA000AAFF);
+                        mViewPager.setBackgroundColor(0XA000FFAA);
                         break;
                     case 1:
-                        mViewPager.setBackgroundColor(0XA000FFAA);
+                        mViewPager.setBackgroundColor(0xA000AAFF);
                         break;
                     case 2:
                         mViewPager.setBackgroundColor(0xA0FFFF00);
                         break;
                     case 3:
-                        mViewPager.setBackgroundColor(0xFF9F3F);
+                        mViewPager.setBackgroundColor(0xFF9F3F00);
+                        break;
                 }
                 skip.setVisibility(position == 3 ? View.INVISIBLE : View.VISIBLE);
                 start.setVisibility(position == 3 ? View.VISIBLE : View.INVISIBLE);
@@ -265,7 +266,8 @@ public class TourActivity extends AppCompatActivity {
         images.
         */
         private ImageView img;
-        //private Integer[] tour_imgs = {R.drawable.graphic, R.drawable.map, R.drawable.tree};
+        private Integer[] tour_imgs = {R.drawable.products, R.drawable.services, R.drawable.donates, R.drawable.rating};
+        private Integer [] tour_msgs = {R.string.product_msg, R.string.service_msg, R.string.donation_msg, R.string.rating_msg};
 
         public PlaceholderFragment() {
         }
@@ -282,12 +284,35 @@ public class TourActivity extends AppCompatActivity {
             return fragment;
         }
 
+        /*  Method that search in the tour_imgs array and link the image corresponding in the fragments
+        container, for show their.
+
+            @date[23/05/2017]
+
+            @author[ChiSeng Ng]
+
+            @param [LayoutInfater] inflater Receive the .xml context and will instance it, for permit to
+            add it into the Views Hierarchy
+
+            @return [void]
+        */
         @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                                  Bundle savedInstanceState) {
             View rootView = inflater.inflate(R.layout.fragment_tour, container, false);
+
+            /* ---Declare and link the container widget TextView, that will contain the text
+            corresponding to show in the tour_msgs array.
+             */
             TextView textView = (TextView) rootView.findViewById(R.id.section_label);
-            textView.setText(getString(R.string.section_format, getArguments().getInt(ARG_SECTION_NUMBER)));
+            textView.setText(getString(tour_msgs[getArguments().getInt(ARG_SECTION_NUMBER) - 1]));
+
+            /* ---Declare and link the container widget ImageView, that will contain the background
+            image corresponding to show in the tour_imgs array.
+             */
+            img = (ImageView) rootView.findViewById(R.id.app_img);
+            img.setBackgroundResource(tour_imgs[getArguments().getInt(ARG_SECTION_NUMBER) - 1]);
+
             return rootView;
         }
     }
@@ -311,8 +336,8 @@ public class TourActivity extends AppCompatActivity {
 
         @Override
         public int getCount() {
-            // Show 3 total pages.
-            return 3;
+            // Show 4 total pages.
+            return 4;
         }
 
         @Override
@@ -324,6 +349,8 @@ public class TourActivity extends AppCompatActivity {
                     return "SECTION 2";
                 case 2:
                     return "SECTION 3";
+                case 3:
+                    return "SECTION 4";
             }
             return null;
         }
